@@ -89,12 +89,22 @@
         ],
         "pathGroups": [
           {
-            "pattern": "{react,react-dom/**}",
+            "pattern": "{react,react-dom/**,react-router*}",
             "group": "builtin",
             "position": "before"
           },
           {
-            "pattern": "{[A-Z]*,**/[A-Z]*}",
+            "pattern": "{routes/**,stores/**,utils/**,hooks/**,domains/**}",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "{A-Z]*,**/[A-Z]*}",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "assets/**}",
             "group": "internal",
             "position": "after"
           },
