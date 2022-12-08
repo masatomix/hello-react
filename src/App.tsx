@@ -1,15 +1,11 @@
 import type { FC } from 'react';
-import { Heading } from '@chakra-ui/react';
-import Counter from 'components/Counter';
-import './App.css';
+import Providers from './Providers';
+import IndexRoutes from './routes';
 
 const App: FC = () => (
-  <>
-    <Heading size="lg" as="h1" my={8}>
-      カウンター
-    </Heading>
-    <Counter />
-  </>
+  <Providers>
+    <IndexRoutes />
+  </Providers>
 );
 
 export default App;
