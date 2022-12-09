@@ -1,9 +1,10 @@
 import { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from 'react';
 import { Button, Checkbox, Heading, Input } from '@chakra-ui/react';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
 
 
 type Props = { pageTitle: string };
-
 
 export interface Todo {
   key: string,
@@ -12,7 +13,6 @@ export interface Todo {
 }
 
 const getKey = () => Math.random().toString(32).substring(2);
-
 
 const Home: FC<Props> = ({ pageTitle }) => {
   const [formData, setFormData] = useState<Todo>({ key: '', name: '', isDone: false });
@@ -48,19 +48,17 @@ const Home: FC<Props> = ({ pageTitle }) => {
     setFormData(todo => ({ ...todo, [name]: value }))
   }
 
-  const style = {
-    cursor: 'pointer',
-    fontSize: '12px',
-    color: 'red'
-  }
+  const style = css`
+  cursor: pointer;
+  fontSize: 12px;
+  color: red;
+  `
 
   return (
     <>
       <Heading size="lg" as="h1" my={8}>
         {pageTitle}
       </Heading>
-
-
       <Input name='name' value={formData.name} onChange={handleChange} />
       <Button onClick={addTask}>追加      </Button>
       <ul>
@@ -68,11 +66,10 @@ const Home: FC<Props> = ({ pageTitle }) => {
           <li key={todo.key}>
             <Checkbox name="isDone" isChecked={todo.isDone}>isDone</Checkbox>
             <span>{todo.name}</span>
-            <span onClick={addTask} style={style}>[x]</span>
+            <span onClick={addTask} css={style}>[x]</span>
           </li>
         ))}
       </ul>
-
     </>
   );
 };
