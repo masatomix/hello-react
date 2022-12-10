@@ -1,6 +1,5 @@
 import { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from 'react';
 import { Button, Checkbox, Heading, Input } from '@chakra-ui/react';
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 
 type Props = { pageTitle: string };
