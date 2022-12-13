@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction, } from 'react';
 import { Button } from '@chakra-ui/react';
-import { css } from '@emotion/react';
+import { css } from '@emotion/css';
 import type { Todo } from 'data';
 
 type Props = {
@@ -18,7 +18,7 @@ const DeleteEndTaskButton: FC<Props> = ({ setTodos }) => {
         })
     }
 
-    return <Button css={css`float: right;`} onClick={() => deleteEndTask()}>完了タスクの削除</Button>
+    return <Button className={css`float: right;`} onClick={() => deleteEndTask()}>完了タスクの削除</Button>
 
 }
 

@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { Heading } from '@chakra-ui/react';
-import { css } from '@emotion/react'
+import { css } from '@emotion/css';
 import type { Todo } from 'data';
 import AddTaskButton from 'components/molecules/AddTaskButton';
 import DeleteEndTaskButton from 'components/molecules/DeleteEndTaskButton';
@@ -34,7 +34,7 @@ const Home: FC<Props> = ({ pageTitle }) => {
   const contents = todos.map((todo) => (
     <li key={todo.key}>
       <IsDoneCheckBox setTodos={setTodos} target={todo} />
-      <span css={doneStyle(todo.isDone)}>{todo.name}</span>
+      <span className={doneStyle(todo.isDone)}>{todo.name}</span>
       <RemoveTaskButton setTodos={setTodos} target={todo} />
     </li>
   ))
@@ -44,12 +44,12 @@ const Home: FC<Props> = ({ pageTitle }) => {
       <Heading size="lg" as="h1" my={8}>
         {pageTitle}
       </Heading>
-      <h1>My Todo Task<span css={infoStyle}>({remaining.length}/{todos.length})</span>
+      <h1>My Todo Task<span className={infoStyle}>({remaining.length}/{todos.length})</span>
         <DeleteEndTaskButton setTodos={setTodos} />
       </h1>
       <InputTaskName formData={formData} setFormData={setFormData} />
       <AddTaskButton formData={formData} setFormData={setFormData} setTodos={setTodos} />
-      <ul css={css`list-style: none;`}>{contents.length ? contents : <li>Todo なし</li>}</ul>
+      <ul className={css`list-style: none;`}>{contents.length ? contents : <li>Todo なし</li>}</ul>
     </>
   );
 };

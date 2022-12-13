@@ -4,12 +4,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
   plugins: [
-    react({
-      jsxImportSource: '@emotion/react',
-    }),
+    react(),
     tsconfigPaths()
-  ],
-  esbuild: {
-    logOverride: { 'this-is-undefined-in-esm': 'silent' }
-  }
+  ]
 })

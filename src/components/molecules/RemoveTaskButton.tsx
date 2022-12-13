@@ -1,5 +1,5 @@
 import { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
-import { css } from '@emotion/react';
+import { css } from '@emotion/css';
 import type { Todo } from 'data';
 
 type Props = {
@@ -31,7 +31,7 @@ const RemoveTaskButton: FC<PropsWithChildren<Props>> = ({
 
     }
 
-    return <span onClick={() => removeTask(target)} css={style}>{children}</span>
+    return <span onClick={() => removeTask(target)} className={style}>{children}</span>
 }
 
 

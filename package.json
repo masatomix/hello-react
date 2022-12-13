@@ -19,9 +19,10 @@
     "prepare": "npx simple-git-hooks || :"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.2.8",
+    "@chakra-ui/react": "^2.4.3",
+    "@emotion/css": "^11.10.5",
     "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.0",
+    "@emotion/styled": "^11.10.5",
     "@reduxjs/toolkit": "^1.8.4",
     "framer-motion": "^7.2.0",
     "react": "^18.2.0",
