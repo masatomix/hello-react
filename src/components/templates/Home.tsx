@@ -1,12 +1,12 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { Heading } from '@chakra-ui/react';
 import { css } from '@emotion/react'
-import RemoveTaskButton from 'components/molecules/removeTaskButton';
 import type { Todo } from 'data';
 import AddTaskButton from 'components/molecules/AddTaskButton';
 import DeleteEndTaskButton from 'components/molecules/DeleteEndTaskButton';
 import InputTaskName from 'components/molecules/InputTaskName';
 import IsDoneCheckBox from 'components/molecules/IsDoneCheckBox';
+import RemoveTaskButton from 'components/molecules/RemoveTaskButton';
 
 type Props = { pageTitle: string };
 
@@ -28,31 +28,28 @@ const Home: FC<Props> = ({ pageTitle }) => {
   const initTodos: Todo[] = JSON.parse(localStorage.getItem("todos") as string) as Todo[] ?? []
   const [todos, setTodos] = useState<Todo[]>(initTodos);
   const [formData, setFormData] = useState<Todo>({ key: '', name: '', isDone: false });
-  const [remainingTasksLength, setRemainingTasksLength] = useState<number>(0);
 
-  useEffect(() => {
-    setRemainingTasksLength(_ => todos.filter(todo => !todo.isDone).length)
-  }, [todos])
+  const remaining = todos.filter(todo => !todo.isDone)
+
+  const contents = todos.map((todo) => (
+    <li key={todo.key}>
+      <IsDoneCheckBox setTodos={setTodos} target={todo} />
+      <span css={doneStyle(todo.isDone)}>{todo.name}</span>
+      <RemoveTaskButton setTodos={setTodos} target={todo} />
+    </li>
+  ))
 
   return (
     <>
       <Heading size="lg" as="h1" my={8}>
         {pageTitle}
       </Heading>
-      <h1>My Todo Task<span css={infoStyle}>({remainingTasksLength}/{todos.length})</span>
-        <DeleteEndTaskButton todos={todos} setTodos={setTodos} />
+      <h1>My Todo Task<span css={infoStyle}>({remaining.length}/{todos.length})</span>
+        <DeleteEndTaskButton setTodos={setTodos} />
       </h1>
       <InputTaskName formData={formData} setFormData={setFormData} />
-      <AddTaskButton formData={formData} setTodos={setTodos} />
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={todo.key}>
-            <IsDoneCheckBox todos={todos} setTodos={setTodos} isChecked={todo.isDone} index={index} />
-            <span css={doneStyle(todo.isDone)}>{todo.name}</span>
-            <RemoveTaskButton todos={todos} setTodos={setTodos} index={index} />
-          </li>
-        ))}
-      </ul>
+      <AddTaskButton formData={formData} setFormData={setFormData} setTodos={setTodos} />
+      <ul css={css`list-style: none;`}>{contents.length ? contents : <li>Todo なし</li>}</ul>
     </>
   );
 };

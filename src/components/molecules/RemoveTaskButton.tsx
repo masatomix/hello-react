@@ -3,9 +3,8 @@ import { css } from '@emotion/react';
 import type { Todo } from 'data';
 
 type Props = {
-    todos: Todo[]
     setTodos: Dispatch<SetStateAction<Todo[]>>
-    index: number
+    target: Todo
 };
 
 const style = css`
@@ -15,18 +14,24 @@ color: red;
 `
 
 const RemoveTaskButton: FC<PropsWithChildren<Props>> = ({
-    todos,
     setTodos,
-    index,
+    target,
     children = '[x]'
 }) => {
 
-    const removeTask = (index: number) => {
-        todos.splice(index, 1)
-        setTodos(_ => [...todos])
+    const removeTask = (target: Todo) => {
+        setTodos(todos => {
+            const position = todos.findIndex(todo => todo.key === target.key)
+            const newTodos = [...todos]
+            newTodos.splice(position, 1)
+            localStorage.setItem('todos', JSON.stringify(newTodos))
+
+            return newTodos
+        })
+
     }
 
-    return <span onClick={() => removeTask(index)} css={style}>{children}</span>
+    return <span onClick={() => removeTask(target)} css={style}>{children}</span>
 }
 
 
