@@ -20,6 +20,7 @@ color:#bbb
 `
 const doneStyle = (isDone: boolean) => isDone ? isDoneStyle : css``
 
+
 //   const getTextareaStyle = (isValid: boolean) => css`
 //   border: solid 1px ${isValid ? "green" : "red"};
 // `
@@ -47,6 +48,7 @@ const Home: FC<Props> = ({ pageTitle }) => {
       <h1>My Todo Task<span className={infoStyle}>({remaining.length}/{todos.length})</span>
         <DeleteEndTaskButton setTodos={setTodos} />
       </h1>
+      <div className={css`color: red;`}>aaa</div>
       <InputTaskName formData={formData} setFormData={setFormData} />
       <AddTaskButton formData={formData} setFormData={setFormData} setTodos={setTodos} />
       <ul className={css`list-style: none;`}>{contents.length ? contents : <li>Todo なし</li>}</ul>
