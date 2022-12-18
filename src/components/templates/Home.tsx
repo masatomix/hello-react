@@ -20,6 +20,10 @@ color:#bbb
 `
 const doneStyle = (isDone: boolean) => isDone ? isDoneStyle : css``
 
+const h1Style = css`border-bottom: 1px solid #ddd;`
+const ulStyle = css`padding:0;list-style: none;`
+const liStyle = css`line-height: 1.5;`
+
 
 //   const getTextareaStyle = (isValid: boolean) => css`
 //   border: solid 1px ${isValid ? "green" : "red"};
@@ -33,7 +37,7 @@ const Home: FC<Props> = ({ pageTitle }) => {
   const remaining = todos.filter(todo => !todo.isDone)
 
   const contents = todos.map((todo) => (
-    <li key={todo.key}>
+    <li key={todo.key} className={liStyle}>
       <IsDoneCheckBox setTodos={setTodos} target={todo} />
       <span className={doneStyle(todo.isDone)}>{todo.name}</span>
       <RemoveTaskButton setTodos={setTodos} target={todo} />
@@ -45,13 +49,12 @@ const Home: FC<Props> = ({ pageTitle }) => {
       <Heading size="lg" as="h1" my={8}>
         {pageTitle}
       </Heading>
-      <h1>My Todo Task<span className={infoStyle}>({remaining.length}/{todos.length})</span>
+      <h1 className={h1Style}>My Todo Task<span className={infoStyle}>({remaining.length}/{todos.length})</span>
         <DeleteEndTaskButton setTodos={setTodos} />
       </h1>
-      <div className={css`color: red;`}>aaa</div>
       <InputTaskName formData={formData} setFormData={setFormData} />
       <AddTaskButton formData={formData} setFormData={setFormData} setTodos={setTodos} />
-      <ul className={css`list-style: none;`}>{contents.length ? contents : <li>Todo なし</li>}</ul>
+      <ul className={ulStyle}>{contents.length ? contents : <li>Todo なし</li>}</ul>
     </>
   );
 };

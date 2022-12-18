@@ -7,6 +7,7 @@ import IndexRoutes from './routes';
 const styles = css`
   ${normalize}
   body {
+    font-size: 16px;
     // color: hotpink; // ここにアプリ固有のベースになるスタイルを書く
   }
 `

@@ -11,6 +11,7 @@ const style = css`
 cursor: pointer;
 fontSize: 12px;
 color: red;
+margin-left: 5px;
 `
 
 const RemoveTaskButton: FC<PropsWithChildren<Props>> = ({

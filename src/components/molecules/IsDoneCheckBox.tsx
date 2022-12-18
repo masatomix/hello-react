@@ -1,6 +1,8 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { Checkbox } from '@chakra-ui/react';
+import { css } from '@emotion/css';
 import type { Todo } from 'data';
+
 
 type Props = {
     setTodos: Dispatch<SetStateAction<Todo[]>>
@@ -26,7 +28,7 @@ const IsDoneCheckBox: FC<Props> = ({
         })
     }
 
-    return <Checkbox name="isDone" isChecked={target.isDone} onChange={() => handleCheckbox(target)} />
+    return <Checkbox name="isDone" isChecked={target.isDone} onChange={() => handleCheckbox(target)} className={css`margin-right: 5px;`}/>
 }
 
 
