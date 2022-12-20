@@ -28,7 +28,9 @@ const IsDoneCheckBox: FC<Props> = ({
         })
     }
 
-    return <Checkbox name="isDone" isChecked={target.isDone} onChange={() => handleCheckbox(target)} className={css`margin-right: 5px;`}/>
+    return <Checkbox name="isDone" isChecked={target.isDone}
+        onChange={() => handleCheckbox(target)}
+        className={css`margin-right: 5px;margin-top: 5px;`} />
 }
 
 

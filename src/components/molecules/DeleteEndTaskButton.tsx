@@ -18,7 +18,7 @@ const DeleteEndTaskButton: FC<Props> = ({ setTodos }) => {
         })
     }
 
-    return <Button className={css`float: right;`} onClick={() => deleteEndTask()}>完了タスクの削除</Button>
+    return <Button colorScheme='blue' className={css`float: right;`} onClick={() => deleteEndTask()}>完了タスクの削除</Button>
 
 }
 
