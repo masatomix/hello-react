@@ -1,7 +1,7 @@
 {
-  "name": "beads-counter-rtk",
+  "name": "my-react-template",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -16,7 +16,9 @@
     "format": "prettier --write --loglevel=warn 'src/**/*.{js,jsx,ts,tsx,html,json,gql,graphql}'",
     "fix": "npm run --silent format; npm run --silent lint:fix",
     "preinstall": "npx typesync || :",
-    "prepare": "npx simple-git-hooks || :"
+    "prepare": "npx simple-git-hooks || :",
+    "storybook": "NODE_OPTIONS='--openssl-legacy-provider' start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.4.3",
@@ -34,12 +36,22 @@
     "redux": "^4.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@storybook/addon-actions": "^6.5.15",
+    "@storybook/addon-essentials": "^6.5.15",
+    "@storybook/addon-interactions": "^6.5.15",
+    "@storybook/addon-links": "^6.5.15",
+    "@storybook/builder-vite": "^0.2.6",
+    "@storybook/react": "^6.5.15",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/babel__core": "^7.1.20",
     "@types/eslint": "^8.4.5",
     "@types/prettier": "^2.7.0",
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@vitejs/plugin-react": "^2.0.1",
+    "babel-loader": "^8.3.0",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^22.0.0",
