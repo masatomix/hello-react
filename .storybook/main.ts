@@ -28,4 +28,3 @@ const config: StorybookViteConfig = {
 };
 
 export default config;
-1
