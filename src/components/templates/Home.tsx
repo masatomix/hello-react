@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Box, Container, Heading } from '@chakra-ui/react';
 import { css } from '@emotion/css';
 import type { Todo } from 'data';
@@ -28,6 +28,10 @@ const Home: FC<Props> = ({ pageTitle }) => {
   const [formData, setFormData] = useState<Todo>({ key: '', name: '', isDone: false });
 
   const remaining = todos.filter(todo => !todo.isDone)
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
 
   // const contents = todos.map((todo) => (
   //   <li key={todo.key} className={liStyle}>

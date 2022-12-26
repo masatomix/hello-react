@@ -26,7 +26,6 @@ const RemoveTaskButton: FC<PropsWithChildren<Props>> = ({
             const position = todos.indexOf(target)
             const newTodos = [...todos]
             newTodos.splice(position, 1)
-            localStorage.setItem('todos', JSON.stringify(newTodos))
 
             return newTodos
         })
@@ -35,7 +34,4 @@ const RemoveTaskButton: FC<PropsWithChildren<Props>> = ({
 
     return <span onClick={() => removeTask(target)} className={style}>{children}</span>
 }
-
-
-
 export default RemoveTaskButton;

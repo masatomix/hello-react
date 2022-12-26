@@ -15,17 +15,13 @@ const IsDoneCheckBox: FC<Props> = ({
 }) => {
 
     const handleCheckbox = (target: Todo) => {
-        setTodos(todos => {
+        setTodos(todos =>
             // targetとおなじkeyのヤツは該当のヤツなので、isDoneをtoggleする
-            const newTodos = todos.map(todo =>
+            todos.map(todo =>
                 todo.key === target.key ?
                     { ...todo, isDone: !todo.isDone }
-                    : todo
-            )
-            localStorage.setItem('todos', JSON.stringify(newTodos))
-
-            return newTodos
-        })
+                    : todo)
+        )
     }
 
     return <Checkbox name="isDone" isChecked={target.isDone}
