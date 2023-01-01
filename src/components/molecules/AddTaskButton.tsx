@@ -19,12 +19,7 @@ const AddTaskButton: FC<Props> = ({
     const addTask = (event: SyntheticEvent) => {
         event.stopPropagation();
         const data = { ...formData, key: getKey() }
-        setTodos(todos => {
-            const newTodos = [...todos, data]
-            localStorage.setItem('todos', JSON.stringify(newTodos))
-
-            return newTodos
-        })
+        setTodos(todos => [...todos, data])
         setFormData(formData => ({ ...formData, name: '' })) // テキストボックスを空に。
     }
 
