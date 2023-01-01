@@ -22,14 +22,6 @@ const RemoveTaskButton: FC<PropsWithChildren<Props>> = ({
 
     const removeTask = (target: Todo) => {
         deleteDoc(doc(db, 'todos', target.key))
-        // setTodos(todos => {
-        //     // const position = todos.findIndex(todo => todo.key === target.key)
-        //     const position = todos.indexOf(target)
-        //     const newTodos = [...todos]
-        //     newTodos.splice(position, 1)
-
-        //     return newTodos
-        // })
     }
 
     return <span onClick={() => removeTask(target)} className={style}><FaRegTrashAlt /></span>

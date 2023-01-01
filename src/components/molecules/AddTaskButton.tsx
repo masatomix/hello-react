@@ -5,9 +5,6 @@ import { collection, updateDoc, doc, addDoc } from 'firebase/firestore';
 import { db } from 'firebaseConfig'
 import { AiOutlinePlus } from 'react-icons/ai'
 
-
-// const getKey: () => string = () => Math.random().toString(32).substring(2);
-
 type Props = {
     formData: Todo
     setFormData: Dispatch<SetStateAction<Todo>>
@@ -24,7 +21,6 @@ const AddTaskButton: FC<Props> = ({
             data.key = docref.id
             updateDoc(doc(db, 'todos', docref.id), data)
         })
-        // setTodos(todos => [...todos, data])
         setFormData(formData => ({ ...formData, name: '' })) // テキストボックスを空に。
     }
 

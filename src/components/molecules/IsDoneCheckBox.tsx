@@ -16,13 +16,6 @@ const IsDoneCheckBox: FC<Props> = ({
         updateDoc(doc(db, 'todos', target.key), {
             isDone: !target.isDone
         })
-        // setTodos(todos =>
-        //     // targetとおなじkeyのヤツは該当のヤツなので、isDoneをtoggleする
-        //     todos.map(todo =>
-        //         todo.key === target.key ?
-        //             { ...todo, isDone: !todo.isDone }
-        //             : todo)
-        // )
     }
 
     return <Checkbox name="isDone" isChecked={target.isDone}
