@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { Box, Container, Heading } from '@chakra-ui/react';
 import { css } from '@emotion/css';
 import type { Todo } from 'data';
@@ -23,15 +23,15 @@ const h1Style = css`border-bottom: 1px solid #ddd;`
 // `
 
 const Home: FC<Props> = ({ pageTitle }) => {
-  const initTodos: Todo[] = JSON.parse(localStorage.getItem("todos") as string) as Todo[] ?? []
-  const [todos, setTodos] = useState<Todo[]>(initTodos);
+  // const initTodos: Todo[] = JSON.parse(localStorage.getItem("todos") as string) as Todo[] ?? []
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [formData, setFormData] = useState<Todo>({ key: '', name: '', isDone: false });
 
   const remaining = todos.filter(todo => !todo.isDone)
 
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
-  }, [todos])
+  // useEffect(() => {
+  //   localStorage.setItem('todos', JSON.stringify(todos))
+  // }, [todos])
 
   // const contents = todos.map((todo) => (
   //   <li key={todo.key} className={liStyle}>
@@ -47,15 +47,13 @@ const Home: FC<Props> = ({ pageTitle }) => {
         {pageTitle}
       </Heading>
       <h1 className={h1Style}>My Todo Task<span className={infoStyle}>({remaining.length}/{todos.length})</span>
-        <DeleteEndTaskButton className={css`float: right;`} setTodos={setTodos} />
+        <DeleteEndTaskButton todos={todos} className={css`float: right;`} setTodos={setTodos} />
       </h1>
       <Box display='flex' mt='2' alignItems='center'>
         <InputTaskName formData={formData} setFormData={setFormData} />
         <AddTaskButton formData={formData} setFormData={setFormData} setTodos={setTodos} />
       </Box>
-      {todos.length ?
-        <TaskTable todos={todos} setTodos={setTodos} /> :
-        <div>Todo なし</div>}
+      <TaskTable todos={todos} setTodos={setTodos} />
     </Container>
   );
 };

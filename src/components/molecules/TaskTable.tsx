@@ -1,7 +1,9 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect } from 'react';
 import { Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
 import { css } from '@emotion/css';
 import type { Todo } from 'data';
+import { query, collection, onSnapshot } from 'firebase/firestore';
+import { db } from 'firebaseConfig'
 import IsDoneCheckBox from 'components/molecules/IsDoneCheckBox';
 import RemoveTaskButton from 'components/molecules/RemoveTaskButton';
 
@@ -17,16 +19,26 @@ type Props = {
 };
 
 const TaskTable: FC<Props> = ({ todos, setTodos }) => {
-  const tmp = todos.map((todo, index) => (
-    <Tr key={todo.key}>
-      <Td>{index + 1}</Td>
-      <Td><IsDoneCheckBox setTodos={setTodos} target={todo} /></Td>
-      <Td><span className={doneStyle(todo.isDone)}>{todo.name}</span></Td>
-      <Td><RemoveTaskButton setTodos={setTodos} target={todo} /></Td>
-    </Tr>
-  ))
 
-  return (
+  useEffect(() => {
+    const q = query(collection(db, 'todos'));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      querySnapshot.docChanges().forEach(change => {
+        console.log(change.type)
+      })
+
+      const newTodos: Todo[] = []
+      querySnapshot.forEach(doc => {
+        newTodos.push(doc.data())
+      })
+      setTodos(todos => newTodos)
+    })
+
+    return () => unsubscribe()
+  }, [])
+
+
+  return todos.length ?
     <TableContainer>
       <Table size='sm'>
         <Thead>
@@ -38,7 +50,16 @@ const TaskTable: FC<Props> = ({ todos, setTodos }) => {
           </Tr>
         </Thead>
         <Tbody>
-          {tmp}
+          {
+            todos.map((todo, index) => (
+              <Tr key={todo.key}>
+                <Td>{index + 1}</Td>
+                <Td><IsDoneCheckBox setTodos={setTodos} target={todo} /></Td>
+                <Td><span className={doneStyle(todo.isDone)}>{todo.name}</span></Td>
+                <Td><RemoveTaskButton setTodos={setTodos} target={todo} /></Td>
+              </Tr>
+            ))
+          }
         </Tbody>
         <Tfoot>
           <Tr>
@@ -49,7 +70,8 @@ const TaskTable: FC<Props> = ({ todos, setTodos }) => {
           </Tr>
         </Tfoot>
       </Table>
-    </TableContainer>)
+    </TableContainer> :
+    <div>Todo なし</div>
 }
 
 export default TaskTable;
