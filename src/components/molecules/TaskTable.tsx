@@ -22,16 +22,19 @@ const TaskTable: FC<Props> = ({ todos, setTodos }) => {
 
   useEffect(() => {
     const q = query(collection(db, 'todos'));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      querySnapshot.docChanges().forEach(change => {
-        console.log(change.type)
-      })
+    const unsubscribe = onSnapshot(q, querySnapshot => {
+      // // querySnapshot.docChanges().forEach(change => {
+      // //   console.log(change.type)
+      // // })
+      // const newTodos: Todo[] = []
+      // querySnapshot.forEach(doc => {
+      //   const data = doc.data()
+      //   // const todo: Todo = { name: data.name, key: doc.id, isDone: data.isDone }
+      //   newTodos.push(data as Todo)
+      // })
 
-      const newTodos: Todo[] = []
-      querySnapshot.forEach(doc => {
-        newTodos.push(doc.data())
-      })
-      setTodos(todos => newTodos)
+      const newTodos = querySnapshot.docs.map(doc => doc.data() as Todo)
+      setTodos(_ => newTodos)
     })
 
     return () => unsubscribe()
@@ -46,7 +49,7 @@ const TaskTable: FC<Props> = ({ todos, setTodos }) => {
             <Th>No.</Th>
             <Th>isDone</Th>
             <Th>タスク名</Th>
-            <Th>削除</Th>
+            <Th></Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -54,9 +57,9 @@ const TaskTable: FC<Props> = ({ todos, setTodos }) => {
             todos.map((todo, index) => (
               <Tr key={todo.key}>
                 <Td>{index + 1}</Td>
-                <Td><IsDoneCheckBox setTodos={setTodos} target={todo} /></Td>
+                <Td><IsDoneCheckBox target={todo} /></Td>
                 <Td><span className={doneStyle(todo.isDone)}>{todo.name}</span></Td>
-                <Td><RemoveTaskButton setTodos={setTodos} target={todo} /></Td>
+                <Td><RemoveTaskButton target={todo} /></Td>
               </Tr>
             ))
           }
@@ -66,7 +69,7 @@ const TaskTable: FC<Props> = ({ todos, setTodos }) => {
             <Th>No.</Th>
             <Th>isDone</Th>
             <Th>タスク名</Th>
-            <Th>削除</Th>
+            <Th></Th>
           </Tr>
         </Tfoot>
       </Table>

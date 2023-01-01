@@ -1,4 +1,3 @@
-import React from 'react';
 import { ComponentStoryObj, ComponentMeta } from '@storybook/react';
 
 import Home from './Home';

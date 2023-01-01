@@ -18,7 +18,7 @@ const InputTaskName: FC<Props> = ({
         setFormData(todo => ({ ...todo, [name]: value }))
     }
 
-    return <Input name='name' value={formData.name} onChange={handleChange} />
+    return <Input name='name' value={formData.name} onChange={handleChange} placeholder='Add Todo'/>
 }
 
 export default InputTaskName;

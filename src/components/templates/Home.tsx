@@ -47,11 +47,11 @@ const Home: FC<Props> = ({ pageTitle }) => {
         {pageTitle}
       </Heading>
       <h1 className={h1Style}>My Todo Task<span className={infoStyle}>({remaining.length}/{todos.length})</span>
-        <DeleteEndTaskButton todos={todos} className={css`float: right;`} setTodos={setTodos} />
+        <DeleteEndTaskButton todos={todos} className={css`float: right;`} />
       </h1>
       <Box display='flex' mt='2' alignItems='center'>
         <InputTaskName formData={formData} setFormData={setFormData} />
-        <AddTaskButton formData={formData} setFormData={setFormData} setTodos={setTodos} />
+        <AddTaskButton formData={formData} setFormData={setFormData} />
       </Box>
       <TaskTable todos={todos} setTodos={setTodos} />
     </Container>

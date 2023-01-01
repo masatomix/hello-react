@@ -11,13 +11,11 @@ import { AiOutlinePlus } from 'react-icons/ai'
 type Props = {
     formData: Todo
     setFormData: Dispatch<SetStateAction<Todo>>
-    setTodos: Dispatch<SetStateAction<Todo[]>>
 };
 
 const AddTaskButton: FC<Props> = ({
     formData,
     setFormData,
-    setTodos
 }) => {
     const addTask = (event: SyntheticEvent) => {
         event.stopPropagation();
@@ -31,7 +29,7 @@ const AddTaskButton: FC<Props> = ({
     }
 
 
-    return <Button colorScheme='blue' onClick={addTask}><AiOutlinePlus /></Button>
+    return <Button colorScheme='blue' onClick={addTask}><AiOutlinePlus size={30} /></Button>
 }
 
 

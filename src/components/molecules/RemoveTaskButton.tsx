@@ -1,4 +1,4 @@
-import { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { css } from '@emotion/css';
 import type { Todo } from 'data';
 import { deleteDoc, doc } from 'firebase/firestore';
@@ -6,7 +6,6 @@ import { db } from 'firebaseConfig'
 import { FaRegTrashAlt } from 'react-icons/fa';
 
 type Props = {
-    setTodos: Dispatch<SetStateAction<Todo[]>>
     target: Todo
 };
 
@@ -18,7 +17,6 @@ margin-left: 5px;
 `
 
 const RemoveTaskButton: FC<PropsWithChildren<Props>> = ({
-    setTodos,
     target,
 }) => {
 
