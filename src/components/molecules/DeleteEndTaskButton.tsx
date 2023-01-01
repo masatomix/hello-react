@@ -1,19 +1,22 @@
-import { Dispatch, FC, SetStateAction, } from 'react';
+import { FC } from 'react';
 import { Button } from '@chakra-ui/react';
 // import { css } from '@emotion/css';
 import type { Todo } from 'data';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { db } from 'firebaseConfig'
 
 type Props = {
-    setTodos: Dispatch<SetStateAction<Todo[]>>
+    todos: Todo[]
     colorScheme?: string
     className?: string
 };
 
 // const defClassName = css``
 
-const DeleteEndTaskButton: FC<Props> = ({ setTodos, colorScheme = 'blue', className }) => {
+const DeleteEndTaskButton: FC<Props> = ({ todos, colorScheme = 'blue', className }) => {
     const deleteEndTask = () => {
-        setTodos(todos => todos.filter(todo => !todo.isDone))
+        todos.filter(todo => todo.isDone).forEach(endTodo => deleteDoc(doc(db, 'todos', endTodo.key)))
+        // setTodos(todos => todos.filter(todo => !todo.isDone))
     }
 
     return <Button colorScheme={colorScheme} className={className} onClick={() => deleteEndTask()}>完了タスクの削除</Button>
