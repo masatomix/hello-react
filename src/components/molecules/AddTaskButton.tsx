@@ -28,7 +28,7 @@ const AddTaskButton: FC<Props> = ({
         setFormData(formData => ({ ...formData, name: '' })) // テキストボックスを空に。
     }
 
-    return <Button onClick={addTask}>追加</Button>
+    return <Button colorScheme='blue' onClick={addTask}>追加</Button>
 }
 
 

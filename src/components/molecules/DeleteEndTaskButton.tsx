@@ -5,9 +5,13 @@ import type { Todo } from 'data';
 
 type Props = {
     setTodos: Dispatch<SetStateAction<Todo[]>>
+    colorScheme?: string
+    className?: string
 };
 
-const DeleteEndTaskButton: FC<Props> = ({ setTodos }) => {
+// const defClassName = css``
+
+const DeleteEndTaskButton: FC<Props> = ({ setTodos, colorScheme = 'blue', className }) => {
 
     const deleteEndTask = () => {
         setTodos(todos => {
@@ -18,7 +22,7 @@ const DeleteEndTaskButton: FC<Props> = ({ setTodos }) => {
         })
     }
 
-    return <Button className={css`float: right;`} onClick={() => deleteEndTask()}>完了タスクの削除</Button>
+    return <Button colorScheme={colorScheme} className={className} onClick={() => deleteEndTask()}>完了タスクの削除</Button>
 
 }
 

@@ -11,6 +11,7 @@ const style = css`
 cursor: pointer;
 fontSize: 12px;
 color: red;
+margin-left: 5px;
 `
 
 const RemoveTaskButton: FC<PropsWithChildren<Props>> = ({
@@ -21,7 +22,8 @@ const RemoveTaskButton: FC<PropsWithChildren<Props>> = ({
 
     const removeTask = (target: Todo) => {
         setTodos(todos => {
-            const position = todos.findIndex(todo => todo.key === target.key)
+            // const position = todos.findIndex(todo => todo.key === target.key)
+            const position = todos.indexOf(target)
             const newTodos = [...todos]
             newTodos.splice(position, 1)
             localStorage.setItem('todos', JSON.stringify(newTodos))
